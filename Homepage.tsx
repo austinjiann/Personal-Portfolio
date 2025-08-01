@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const uiFont = {
   fontFamily: 'Roboto, sans-serif',
@@ -16,6 +16,43 @@ const Homepage: React.FC<HomepageProps> = ({ isVisible, showHeroText = true }) =
     const t = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(t);
   }, []);
+
+  // Navigation state
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [pillStyle, setPillStyle] = useState({ transform: 'translateX(0px)', width: '0px' });
+  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const navLinks = [
+    { href: '#home', label: 'home' },
+    { href: '#about', label: 'about' },
+    { href: '#projects', label: 'projects' },
+    { href: '#blog', label: 'blog' }
+  ];
+
+  // Update pill position when active index changes
+  useEffect(() => {
+    if (linkRefs.current[activeIndex] && containerRef.current) {
+      const activeLink = linkRefs.current[activeIndex];
+      const container = containerRef.current;
+      
+      if (activeLink) {
+        const containerRect = container.getBoundingClientRect();
+        const linkRect = activeLink.getBoundingClientRect();
+        
+        // Add extra padding to make pill larger and centered
+        const extraPadding = 16; // 8px on each side
+        const containerPadding = 8; // px-2 = 8px padding
+        const translateX = linkRect.left - containerRect.left - containerPadding - (extraPadding / 2);
+        const width = linkRect.width + extraPadding;
+        
+        setPillStyle({
+          transform: `translateX(${translateX}px)`,
+          width: `${width}px`
+        });
+      }
+    }
+  }, [activeIndex, isVisible]);
 
   const fmtTime = (d: Date) =>
     d.toLocaleTimeString('en-US', { 
@@ -63,44 +100,42 @@ const Homepage: React.FC<HomepageProps> = ({ isVisible, showHeroText = true }) =
           }`}
           style={{ transitionDelay: '400ms' }}
         >
-          <ul className="flex justify-center items-center space-x-8 text-[14px]">
-            <li>
-              <a
-                href="#home"
-                className="border border-white rounded-full px-6 py-2 hover:bg-white hover:text-black transition-colors duration-300"
-                style={uiFont}
-              >
-                home
-              </a>
-            </li>
-            <li>
-              <a 
-                href="#work" 
-                className="hover:opacity-70 transition-opacity duration-300"
-                style={uiFont}
-              >
-                about
-              </a>
-            </li>
-            <li>
-              <a 
-                href="#archive" 
-                className="hover:opacity-70 transition-opacity duration-300"
-                style={uiFont}
-              >
-                projects
-              </a>
-            </li>
-            <li>
-              <a 
-                href="#about" 
-                className="hover:opacity-70 transition-opacity duration-300"
-                style={uiFont}
-              >
-                blog
-              </a>
-            </li>
-          </ul>
+          <div
+            ref={containerRef}
+            className="relative mx-auto w-fit border border-white rounded-full px-2 py-2 bg-transparent"
+            style={{ backgroundColor: '#000' }}
+          >
+            {/* Animated pill background */}
+            <div
+              className="absolute top-[1px] left-[1px] h-[calc(100%-2px)] bg-white rounded-full transition-all duration-300 ease-out"
+              style={pillStyle}
+            />
+            
+            {/* Navigation links */}
+            <div className="flex items-center space-x-0 relative z-10">
+              {navLinks.map((link, index) => (
+                <a
+                  key={link.href}
+                  ref={(el) => (linkRefs.current[index] = el)}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveIndex(index);
+                  }}
+                  className={`px-4 py-2 text-sm transition-all duration-200 hover:opacity-80 ${
+                    activeIndex === index ? 'text-black' : 'text-white'
+                  }`}
+                  style={{
+                    ...uiFont,
+                    fontWeight: 'normal',
+                    textTransform: 'lowercase'
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
         </nav>
 
         {/* footers */}
