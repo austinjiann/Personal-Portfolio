@@ -43,7 +43,8 @@ const Homepage: React.FC<HomepageProps> = ({ isVisible, showHeroText = true }) =
         // Add extra padding to make pill larger and centered
         const extraPadding = 16; // 8px on each side
         const containerPadding = 8; // px-2 = 8px padding
-        const translateX = linkRect.left - containerRect.left - containerPadding - (extraPadding / 2);
+        const rightShift = 6.5; // Shift pill slightly to the right
+        const translateX = linkRect.left - containerRect.left - containerPadding - (extraPadding / 2) + rightShift;
         const width = linkRect.width + extraPadding;
         
         setPillStyle({
