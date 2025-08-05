@@ -14,55 +14,80 @@ npm run preview     # Preview production build locally
 
 ## Project Architecture
 
-This is a React TypeScript personal portfolio site built with Vite and styled with Tailwind CSS. The main feature is a seamless animated transition from a word collage intro screen to the main homepage.
+This is a React TypeScript personal portfolio site built with Vite, styled with Tailwind CSS, and using React Router for navigation. The centerpiece is an animated text collage intro that plays on home page refresh, followed by a clean multi-page navigation experience.
 
-### Core Component Flow & State Management
+### Core Application Flow & State Management
 
-**App.tsx** - Root component managing the transition sequence:
-- Controls `showHomepage` state triggered by `onWordsFadeStart` from AnimatedTextCollage
-- Renders both AnimatedTextCollage and Homepage components simultaneously during transition
-- AnimatedTextCollage has `keepHeroVisible={true}` to persist hero text during homepage fade-in
-- Homepage receives `showHeroText={false}` to avoid duplicate hero rendering
+**App.tsx** - Root component managing animation states and routing:
+- Detects page refresh vs navigation using `PerformanceNavigationTiming` API and sessionStorage
+- Controls animation sequence: `showCollage`, `showHomepage`, `animationComplete` states
+- Renders AnimatedTextCollage only on home page refresh/fresh load (`isPageRefresh` && `location.pathname === '/'`)
+- Uses Layout component wrapper that conditionally shows Footer based on route and animation state
+- Routes: `/` (Home), `/about` (About), `/projects` (Projects), `/blog` (Blog)
+
+**Animation State Logic**:
+- **Fresh load/refresh on home**: Animation plays → Footer hidden during animation → Footer fades in after completion
+- **Navigation between pages**: No animation → Immediate content display
+- **Direct navigation to home**: No animation → Footer appears with delay to maintain UX consistency
+
+### Key Components
 
 **AnimatedTextCollage.tsx** - Complex word placement and animation system:
-- Generates 50 words from `WORD_LIST` (22 base + 4 extra + 24 duplicates) with collision detection
-- Uses radial distribution algorithm with size-based ring placement (larger text closer to center)
-- Implements sophisticated collision avoidance between random words and centered hero text
-- Animation phases: word fade-in (staggered over 2s) → hero appears (2.1s) → words fade out (5.1s)
-- Hero text persists when `keepHeroVisible=true`, only words and background fade out
-- Calls `onWordsFadeStart` when words begin fading to trigger homepage transition
+- Generates 50 words from `WORD_LIST` with sophisticated collision detection
+- Uses radial distribution algorithm with size-based ring placement
+- Animation timeline: words fade-in (2s) → hero appears (2.1s) → words fade-out (5.1s) → background fades (5.7s)
+- Calls `onWordsFadeStart` to trigger Layout transition, `onAnimationComplete` when finished
+- `keepHeroVisible={true}` preserves hero text during transition
 
-**Homepage.tsx** - Main portfolio interface with conditional hero rendering:
-- Accepts `showHeroText` prop to control hero text display (false when collage hero persists)
-- Features animated navigation pill that slides between nav items
-- Displays live Toronto time and staggered fade-in animations
-- Uses spacer div to maintain layout when hero text is rendered externally
+**Home.tsx** - Minimal landing page with hero text repositioning:
+- Accepts `animationComplete` prop to coordinate with App state
+- Hero text transitions from center to top position after animation (or immediately on direct navigation)
+- Clean design with just "AUSTIN JIAN" text, no additional content
+
+**About.tsx** - Dedicated content page with personal information
+**Projects.tsx** & **Blog.tsx** - Placeholder pages for future content
+
+**Footer.tsx** - Navigation component with animated pill indicator:
+- Contains `navLinks` array defining routes and labels
+- Implements sliding pill animation that follows active navigation item
+- Includes social media icons, navigation bar, and live Toronto time display
+- Conditionally rendered based on route and animation state via Layout component
 
 ### Critical Implementation Details
 
-**Seamless Transition System**: The hero text "AUSTIN JIAN" never moves during the transition. The AnimatedTextCollage version remains visible and positioned while Homepage content fades in around it. This creates the illusion of a single persistent hero element.
+**Animation Trigger Logic**: App.tsx:34-81
+- Uses `window.performance.getEntriesByType('navigation')` to detect refresh vs navigation
+- SessionStorage (`hasNavigated`) tracks if user has navigated within session
+- Only triggers animation on true refresh/fresh load, never on tab navigation
 
-**Word Placement Algorithm**: AnimatedTextCollage:84-216
-- Uses polar coordinates with radial rings for organic distribution
-- Implements collision detection with 6% buffer zones between words
-- Separates duplicates by minimum 15% distance to avoid clustering
-- Falls back to edge positions if placement fails after 100 attempts
+**Footer Visibility System**: App.tsx:10-35
+- Layout component receives `animationComplete` prop from App state
+- Footer shows on all pages except home during animation
+- Formula: `showFooter = location.pathname !== '/' || (location.pathname === '/' && animationComplete)`
+- Includes fade-in transition with `duration-700` and `400ms` delay
 
-**Z-Index Layering Strategy**:
-- Hero text: z-50 (always on top during transition)
-- Collage container: z-30  
-- Homepage: z-20 (behind collage during transition)
-- Background: z-20 (fades out independently)
+**Hero Text Positioning**: Home.tsx:10-19
+- Conditional positioning: centered during animation, top-aligned after completion
+- Responsive text sizing: larger during animation, smaller when repositioned
+- Uses `heroMoved` state to control transition timing
 
-**Animation Timeline**:
-- 0-2.1s: Random words fade in with staggered delays
-- 2.1s: "AUSTIN JIAN" hero text appears
-- 5.1s: Words fade out, `onWordsFadeStart` triggers homepage fade-in
-- 5.7s: Background fades out, `onAnimationComplete` fires
+**Navigation State Management**: Footer.tsx:29-37
+- Active index automatically updates based on `location.pathname`
+- Animated pill positioning calculated via DOM measurements and transforms
+- Handles both direct navigation and programmatic route changes
 
 ### Key Configuration Points
 
-**Word Content**: Edit `BASE_WORD_LIST` and `EXTRA_WORDS` in AnimatedTextCollage.tsx:16-28
-**Timing Adjustments**: Modify timeout values in AnimatedTextCollage.tsx:227-258
-**Navigation Links**: Update `navLinks` array in Homepage.tsx:26-31
-**Responsive Breakpoints**: Both components use consistent text sizing classes for hero text
+**Animation Content**: Edit `BASE_WORD_LIST` and `EXTRA_WORDS` in AnimatedTextCollage.tsx:16-28  
+**Animation Timing**: Modify timeout values in AnimatedTextCollage.tsx:227-258  
+**Navigation Routes**: Update `navLinks` array in Footer.tsx:8-13  
+**Social Links**: Update URLs in Footer.tsx social media section  
+**Hero Text**: Modify text content in AnimatedTextCollage.tsx:329 and Home.tsx:40
+
+### Architecture Notes
+
+**State Flow**: App manages global animation state → Layout controls Footer visibility → Home handles hero positioning  
+**Routing Strategy**: React Router with conditional rendering during animation sequence  
+**Animation Philosophy**: Animation only on refresh preserves user expectation while showcasing visual appeal  
+**Responsive Design**: Consistent breakpoints across components using Tailwind responsive classes  
+**Performance**: Animation sequence completely bypassed on navigation for instant page loads
