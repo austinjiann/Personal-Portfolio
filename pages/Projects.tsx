@@ -1,18 +1,22 @@
 import React from 'react';
 import ContentContainer from '../components/ContentContainer';
 
+const uiFont = {
+  fontFamily: 'Roboto, sans-serif',
+};
+
 const Projects: React.FC = () => {
   return (
     <div className="flex-1 flex items-center justify-center">
       <ContentContainer>
         <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-wider text-white mb-12">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-wider text-white mb-12" style={uiFont}>
             Projects
           </h1>
           <div className="grid grid-cols-1 gap-8">
             <div className="bg-gray-900 rounded-lg p-6 border border-gray-700">
-              <h3 className="text-xl font-medium text-white mb-4">Project One</h3>
-              <p className="text-gray-400 mb-4">
+              <h3 className="text-xl font-medium text-white mb-4" style={uiFont}>Project One</h3>
+              <p className="text-gray-400 mb-4" style={uiFont}>
                 Description of your first project. What technologies did you use? 
                 What problem did it solve?
               </p>
@@ -23,8 +27,8 @@ const Projects: React.FC = () => {
             </div>
             
             <div className="bg-gray-900 rounded-lg p-6 border border-gray-700">
-              <h3 className="text-xl font-medium text-white mb-4">Project Two</h3>
-              <p className="text-gray-400 mb-4">
+              <h3 className="text-xl font-medium text-white mb-4" style={uiFont}>Project Two</h3>
+              <p className="text-gray-400 mb-4" style={uiFont}>
                 Description of your second project. What was challenging about it? 
                 What did you learn?
               </p>
@@ -35,8 +39,8 @@ const Projects: React.FC = () => {
             </div>
             
             <div className="bg-gray-900 rounded-lg p-6 border border-gray-700">
-              <h3 className="text-xl font-medium text-white mb-4">Project Three</h3>
-              <p className="text-gray-400 mb-4">
+              <h3 className="text-xl font-medium text-white mb-4" style={uiFont}>Project Three</h3>
+              <p className="text-gray-400 mb-4" style={uiFont}>
                 Description of your third project. What inspired you to build it? 
                 What was the outcome?
               </p>
