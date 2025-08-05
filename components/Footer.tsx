@@ -12,7 +12,11 @@ export const navLinks = [
   { path: '/blog', label: 'blog' }
 ];
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  showAnimation?: boolean;
+}
+
+const Footer: React.FC<FooterProps> = ({ showAnimation = false }) => {
   const location = useLocation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [pillStyle, setPillStyle] = useState({ transform: 'translateX(0px)', width: '0px' });
@@ -72,14 +76,14 @@ const Footer: React.FC = () => {
     });
 
   return (
-    <footer className="mt-auto relative">
+    <footer className={`mt-auto relative ${showAnimation ? 'animate-fadeIn' : ''}`}>
              {/* Social media icons - positioned left of center */}
        <div
-         className="fixed bottom-10 flex space-x-4 transition-all duration-700 transform opacity-100 z-50"
+         className={`fixed bottom-10 flex space-x-4 z-50 ${showAnimation ? 'animate-fadeInUpSocial' : ''}`}
          style={{ 
-           transitionDelay: '800ms',
            left: 'calc(50% - min(55vw, 470px))', // Shifted slightly right
-           transform: 'translateY(-4px)' // Move up 4px
+           transform: 'translateY(-4px)', // Move up 4px
+           ...(showAnimation && { animationDelay: '600ms', opacity: 0 })
          }}
        >
         <a
@@ -123,9 +127,9 @@ const Footer: React.FC = () => {
       </div>
 
              {/* Navigation bar - perfectly centered */}
-       <nav
-         className="pb-8 transition-all duration-700 transform opacity-100 translate-y-0"
-         style={{ transitionDelay: '400ms' }}
+       <nav 
+         className={`pb-8 ${showAnimation ? 'animate-fadeInUp' : ''}`}
+         style={showAnimation ? { animationDelay: '400ms', opacity: 0 } : {}}
        >
          <div className="flex justify-center">
            <div
@@ -165,14 +169,7 @@ const Footer: React.FC = () => {
         </div>
       </nav>
 
-      {/* Toronto time display - bottom right */}
-      <div
-        className="fixed bottom-8 right-8 text-xs text-right opacity-70 transition-all duration-700 transform translate-y-0"
-        style={{ transitionDelay: '600ms' }}
-      >
-        <div>toronto</div>
-        <div>{fmtTime(now)}</div>
-      </div>
+     
     </footer>
   );
 };

@@ -10,7 +10,8 @@ import Blog from './pages/Blog';
 const Layout: React.FC<{ 
   children: React.ReactNode; 
   animationComplete?: boolean;
-}> = ({ children, animationComplete = false }) => {
+  showFooterAnimation?: boolean;
+}> = ({ children, animationComplete = false, showFooterAnimation = false }) => {
   const location = useLocation();
   const showFooter = location.pathname !== '/' || (location.pathname === '/' && animationComplete);
 
@@ -24,12 +25,7 @@ const Layout: React.FC<{
       }}
     >
       {children}
-      {showFooter && (
-        <div className="transition-all duration-700 opacity-100 translate-y-0" 
-             style={{ transitionDelay: '400ms' }}>
-          <Footer />
-        </div>
-      )}
+      {showFooter && <Footer showAnimation={showFooterAnimation} />}
     </div>
   );
 };
@@ -83,7 +79,7 @@ const App: React.FC = () => {
           >
             <div className="min-h-screen flex flex-col">
               <div className="flex-1" />
-              {animationComplete && <Footer />}
+              {animationComplete && <Footer showAnimation={true} />}
             </div>
           </div>
         )}
@@ -96,26 +92,26 @@ const App: React.FC = () => {
       <Route path="/" element={
         // Only render home page if not in animation mode
         !showCollage ? (
-          <Layout animationComplete={animationComplete}>
-            <Home animationComplete={animationComplete} />
-          </Layout>
-        ) : null
-      } />
-      <Route path="/about" element={
-        <Layout animationComplete={animationComplete}>
-          <About />
+                  <Layout animationComplete={animationComplete} showFooterAnimation={false}>
+          <Home animationComplete={animationComplete} />
         </Layout>
-      } />
-      <Route path="/projects" element={
-        <Layout animationComplete={animationComplete}>
-          <Projects />
-        </Layout>
-      } />
-      <Route path="/blog" element={
-        <Layout animationComplete={animationComplete}>
-          <Blog />
-        </Layout>
-      } />
+      ) : null
+    } />
+    <Route path="/about" element={
+      <Layout animationComplete={animationComplete} showFooterAnimation={false}>
+        <About />
+      </Layout>
+    } />
+    <Route path="/projects" element={
+      <Layout animationComplete={animationComplete} showFooterAnimation={false}>
+        <Projects />
+      </Layout>
+    } />
+    <Route path="/blog" element={
+      <Layout animationComplete={animationComplete} showFooterAnimation={false}>
+        <Blog />
+      </Layout>
+    } />
     </Routes>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ContentContainer from '../components/ContentContainer';
 
 interface HomeProps {
   animationComplete?: boolean;
@@ -31,15 +32,17 @@ const Home: React.FC<HomeProps> = ({ animationComplete = false }) => {
           transform: heroMoved ? 'none' : 'translateY(30px)'
         }}
       >
-        <div className="text-center">
-          <h1 className={`font-light tracking-wider text-white transition-all duration-1000 ${
-            heroMoved 
-              ? 'text-4xl sm:text-5xl md:text-6xl lg:text-7xl' 
-              : 'text-6xl sm:text-7xl md:text-8xl lg:text-9xl'
-          }`}>
-            AUSTIN&nbsp;JIAN
-          </h1>
-        </div>
+        <ContentContainer>
+          <div className="text-center">
+            <h1 className={`font-light tracking-wider text-white transition-all duration-1000 ${
+              heroMoved 
+                ? 'text-4xl sm:text-5xl md:text-6xl lg:text-7xl' 
+                : 'text-6xl sm:text-7xl md:text-8xl lg:text-9xl'
+            }`}>
+              AUSTIN&nbsp;JIAN
+            </h1>
+          </div>
+        </ContentContainer>
       </div>
 
     </div>
