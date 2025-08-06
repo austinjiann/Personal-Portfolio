@@ -241,24 +241,47 @@ const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = f
             </div>
           </div>
         </div>
-        {/* Resume Section */}
-        <div className="mt-16 text-center">
-          <a 
-            href="/resume.pdf" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-block resume-box"
-          >
-            <div className="bg-gray-800 text-white border-4 border-gray-500 
-        rounded-2xl px-8 py-8 hover:border-white hover:scale-105 transition-all 
-        duration-300 ease-out">
-              <span className="text-2xl sm:text-3xl font-light tracking-wider" 
-        style={uiFont}>
-                <strong>resume</strong>
-              </span>
-            </div>
-          </a>
-        </div>
+        <br/>
+        <br/>
+
+                  {/* Resume Section */}
+          <div className="mt-24 text-center">
+            <a 
+              href="/resume.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                width: 'calc(100% - 2.5rem)',
+                maxWidth: 'calc(100% - 2.5rem)',
+                marginRight: '2rem'
+              }}
+            >
+              <div 
+                style={{
+                  backgroundColor: '#2E2E2E',
+                  border: '2px solid white',
+                  borderRadius: '2rem',
+                  paddingLeft: '2rem',
+                  paddingRight: '2rem',
+                  paddingTop: '2rem',
+                  paddingBottom: '2rem',
+                  boxSizing: 'border-box',
+                  width: '100%',
+                  color: 'white',
+                  transform: 'scale(1)',
+                  transition: 'transform 0.3s ease-out',
+                  ...uiFont
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                <span className="text-3xl sm:text-3xl font-bold tracking-wider">
+                  <strong>check out my resume</strong>
+                </span>
+              </div>
+            </a>
+          </div>
       </ContentContainer>
     </div>
   );

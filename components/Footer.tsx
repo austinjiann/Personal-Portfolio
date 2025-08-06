@@ -19,12 +19,7 @@ const Footer: React.FC = () => {
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Live time / date for Toronto
-  const [now, setNow] = useState(new Date());
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(t);
-  }, []);
+
 
   // Update active index based on current route
   useEffect(() => {
@@ -63,13 +58,6 @@ const Footer: React.FC = () => {
     }
   }, [activeIndex]);
 
-  const fmtTime = (d: Date) =>
-    d.toLocaleTimeString('en-US', { 
-      hour: '2-digit', 
-      minute: '2-digit', 
-      hour12: false,
-      timeZone: 'America/Toronto'
-    });
 
   return (
     <footer className="mt-auto relative">
@@ -165,14 +153,7 @@ const Footer: React.FC = () => {
         </div>
       </nav>
 
-      {/* Toronto time display - bottom right */}
-      <div
-        className="fixed bottom-8 right-8 text-xs text-right opacity-70 transition-all duration-700 transform translate-y-0"
-        style={{ transitionDelay: '600ms' }}
-      >
-        <div>toronto</div>
-        <div>{fmtTime(now)}</div>
-      </div>
+
     </footer>
   );
 };
