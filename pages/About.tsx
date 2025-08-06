@@ -241,6 +241,24 @@ const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = f
             </div>
           </div>
         </div>
+        {/* Resume Section */}
+        <div className="mt-16 text-center">
+          <a 
+            href="/resume.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-block resume-box"
+          >
+            <div className="bg-gray-800 text-white border-4 border-gray-500 
+        rounded-2xl px-8 py-8 hover:border-white hover:scale-105 transition-all 
+        duration-300 ease-out">
+              <span className="text-2xl sm:text-3xl font-light tracking-wider" 
+        style={uiFont}>
+                <strong>resume</strong>
+              </span>
+            </div>
+          </a>
+        </div>
       </ContentContainer>
     </div>
   );
