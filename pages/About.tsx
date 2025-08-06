@@ -41,7 +41,7 @@ const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = f
                 <li className="flex items-center mb-6">
                   <span className="flex items-center text-blue-400 mr-3">•</span>
                   <span className="flex items-center">
-                    &nbsp;incoming freshman at the&nbsp;
+                    &nbsp;Incoming freshman at the&nbsp;
                     <img
                       src="/uw.png"
                       alt="University of Waterloo"
@@ -52,49 +52,120 @@ const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = f
                       href="https://uwaterloo.ca" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="underline decoration-gray-500 hover:decoration-white hover:text-white transition-all duration-200 cursor-pointer text-gray-300"
+                      className="relative uw-link hover:text-white transition-all duration-200 cursor-pointer text-gray-300"
                     >
-                      university of waterloo
+                      University of Waterloo
                     </a>, studying computer science
+                  </span>
+                </li>
+                <li className="flex items-center mb-6">
+                  <span className="flex items-center text-blue-400 mr-3">•</span>
+                  <span className="flex items-center">
+                    &nbsp;SWE at&nbsp;
+                    <img
+                      src="/gplogo.png"
+                      alt="GoPlace"
+                      className="inline-block h-5 sm:h-6 w-auto mx-1"
+                      style={{ maxHeight: '1.5rem' }}
+                    />
+                    &nbsp;
+                    <a 
+                      href="https://www.goplace.com/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="relative uw-link hover:text-white transition-all duration-200 cursor-pointer text-gray-300"
+                    >
+                      GoPlace
+                    </a>, where I'm working on full-stack web development
                   </span>
                 </li>
                 <li className="flex items-start mb-6">
                   <span className="text-blue-400 mr-3 mt-1">•</span>
-                  <span>&nbsp;Love building beautiful, functional experiences that bridge design and technology</span>
-                </li>
-                <li className="flex items-start mb-6">
-                  <span className="text-blue-400 mr-3 mt-1">•</span>
-                  <span>Always exploring new technologies and design trends</span>
-                </li>
-                <li className="flex items-start mb-6">
-                  <span className="text-blue-400 mr-3 mt-1">•</span>
-                  <span>[Add your background/education here]</span>
+                  <span>&nbsp;Building live clip farming and stat analysis for all athletes</span>
                 </li>
               </ul>
             </div>  
             <br/>
-            {/* Skills & Interests Section */}
             <div className="mb-12">
               <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-6" style={uiFont}>
                 <strong><i>Previously:</i></strong>
               </h2>
               <br/>
               <ul className="text-2xl sm:text-3xl text-gray-300 leading-relaxed space-y-8" style={uiFont}>
-                <li className="flex items-start mb-6">
-                  <span className="text-green-400 mr-3 mt-1">•</span>
-                  <span>[Add your technical skills here]</span>
+              <li className="flex items-center mb-6">
+                  <span className="flex items-center text-blue-400 mr-3">•</span>
+                  <span className="flex items-center">
+                    &nbsp;SWE at&nbsp;
+                    <img
+                      src="/cyc.png"
+                      alt="Canadian Youth Champions"
+                      className="inline-block h-5 sm:h-6 w-auto mx-1"
+                      style={{ maxHeight: '1.5rem' }}
+                    />
+                    &nbsp;<a 
+                      href="https://www.thecyc.org/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="relative uw-link hover:text-white transition-all duration-200 cursor-pointer text-gray-300"
+                    >
+                      Canadian Youth Champions
+                    </a>, where I built their application portal
+                  </span>
                 </li>
-                <li className="flex items-start mb-6">
-                  <span className="text-green-400 mr-3 mt-1">•</span>
-                  <span>[Add programming languages/frameworks]</span>
+                
+                <li className="flex items-center mb-6">
+                  <span className="flex items-center text-blue-400 mr-3">•</span>
+                  <span className="flex items-center">
+                    &nbsp;Won $1,500 and first place in the&nbsp;
+                    <img
+                      src="/vellum.png"
+                      alt="vellum"
+                      className="inline-block h-5 sm:h-6 w-auto mx-1"
+                      style={{ maxHeight: '1.5rem' }}
+                    />
+                    &nbsp;<a 
+                      href="https://www.vellum.ai/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="relative uw-link hover:text-white transition-all duration-200 cursor-pointer text-gray-300"
+                    >
+                      Vellum
+                    </a> &nbsp;prize track at&nbsp;
+                    <img
+                      src="/ht6.png"
+                      alt="hack the 6ix"
+                      className="inline-block h-5 sm:h-6 w-auto mx-1"
+                      style={{ maxHeight: '1.5rem' }}
+                    />
+                    &nbsp;<a 
+                      href="https://hackthe6ix2025.devpost.com/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="relative uw-link hover:text-white transition-all duration-200 cursor-pointer text-gray-300"
+                    >
+                      Hack the 6ix
+                    </a>
+                  </span>
                 </li>
-                <li className="flex items-start mb-6">
-                  <span className="text-green-400 mr-3 mt-1">•</span>
-                  <span>[Add design tools/creative skills]</span>
-                </li>
-                <li className="flex items-start mb-6">
-                  <span className="text-green-400 mr-3 mt-1">•</span>
-                  <span>[Add hobbies/interests]</span>
+                <li className="flex items-center mb-6">
+                  <span className="flex items-center text-blue-400 mr-3">•</span>
+                  <span className="flex items-center">
+                    &nbsp;Won $1,000 and first place at&nbsp;
+                    <img
+                      src="/hack404.png"
+                      alt="Hack404"
+                      className="inline-block h-5 sm:h-6 w-auto mx-1"
+                      style={{ maxHeight: '1.5rem' }}
+                    />
+                    &nbsp;<a 
+                      href="https://hack404-2025.devpost.com/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="relative uw-link hover:text-white transition-all duration-200 cursor-pointer text-gray-300"
+                    >
+                      Hack404
+                    </a>
+                  </span>
                 </li>
               </ul>
             </div>
@@ -106,17 +177,65 @@ const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = f
               </h2>
               <br/>
               <ul className="text-2xl sm:text-3xl text-gray-300 leading-relaxed space-y-8" style={uiFont}>
-                <li className="flex items-start mb-6">
-                  <span className="text-purple-400 mr-3 mt-1">•</span>
-                  <span>[Add what you're working on now]</span>
+              <li className="flex items-center mb-6">
+                  <span className="flex items-center text-blue-400 mr-3">•</span>
+                  <span className="flex items-center">
+                    &nbsp;Posting daily to document my journey in computer science on&nbsp;
+                    <img
+                      src="/twitter.png"
+                      alt="twitter"
+                      className="inline-block h-5 sm:h-6 w-auto mx-1"
+                      style={{ maxHeight: '1.5rem' }}
+                    />
+                    &nbsp;<a 
+                      href="https://x.com/austinjian_" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="relative uw-link hover:text-white transition-all duration-200 cursor-pointer text-gray-300"
+                    >
+                      Twitter
+                    </a>
+                  </span>
+                </li>
+                <li className="flex items-center mb-6">
+                  <span className="flex items-center text-blue-400 mr-3">•</span>
+                  <span className="flex items-center">
+                    &nbsp;Playing video games (prev top 1% in&nbsp;
+                    <img
+                      src="/val.png"
+                      alt="val"
+                      className="inline-block h-5 sm:h-6 w-auto mx-1"
+                      style={{ maxHeight: '1.5rem' }}
+                    />
+                    &nbsp;<a 
+                      href="https://tracker.gg/valorant/profile/riot/osten%23OSTEB/overview?platform=pc&playlist=competitive&season=aef237a0-494d-3a14-a1c8-ec8de84e309c" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="relative uw-link hover:text-white transition-all duration-200 cursor-pointer text-gray-300"
+                    >
+                      Valorant
+                    </a>
+                    , 2000+ hours on&nbsp;
+                    <img
+                      src="/mc.png"
+                      alt="mc"
+                      className="inline-block h-5 sm:h-6 w-auto mx-1"
+                      style={{ maxHeight: '1.5rem' }}
+                    />
+                    &nbsp;<a 
+                      href="https://plancke.io/hypixel/player/stats/ostebn" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="relative uw-link hover:text-white transition-all duration-200 cursor-pointer text-gray-300"
+                    >
+                      Minecraft
+                    </a>
+                    )
+                  </span>
                 </li>
                 <li className="flex items-start mb-6">
-                  <span className="text-purple-400 mr-3 mt-1">•</span>
-                  <span>[Add current projects/learning]</span>
-                </li>
-                <li className="flex items-start mb-6">
-                  <span className="text-purple-400 mr-3 mt-1">•</span>
-                  <span>[Add current goals/focus areas]</span>
+                  <span className="text-blue-400 mr-3 mt-1">•</span>
+                  <span>&nbsp;Playing badminton, going out with friends, eating food</span>
                 </li>
               </ul>
             </div>

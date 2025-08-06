@@ -47,3 +47,34 @@ body {
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
+/* University of Waterloo link animation */
+.uw-link {
+  position: relative;
+}
+
+.uw-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: rgb(107, 114, 128); /* gray-500 */
+  transition: all 0.5s ease;
+  transform-origin: left;
+}
+
+.uw-link:hover::after {
+  background-color: white;
+  animation: zipUnderline 0.8s ease-out;
+}
+
+@keyframes zipUnderline {
+  0% { 
+    transform: scaleX(0);
+  }
+  100% { 
+    transform: scaleX(1);
+  }
+}
+
