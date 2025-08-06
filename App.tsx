@@ -69,19 +69,9 @@ const App: React.FC = () => {
           keepHeroVisible={true}
         />
         {showHomepage && (
-          <div 
-            className="fixed inset-0 text-white z-20"
-            style={{ 
-              backgroundColor: '#1B1B1B',
-              backgroundImage: 'radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px)',
-              backgroundSize: '20px 20px'
-            }}
-          >
-            <div className="min-h-screen flex flex-col">
-              <div className="flex-1" />
-              {animationComplete && <Footer showAnimation={true} />}
-            </div>
-          </div>
+          <Layout animationComplete={animationComplete} showFooterAnimation={true}>
+            <div className="flex-1" />
+          </Layout>
         )}
       </div>
     );

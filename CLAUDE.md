@@ -44,7 +44,15 @@ This is a React TypeScript personal portfolio site built with Vite, styled with 
 - Uses `heroMoved` state with responsive text sizing and smooth transitions
 - Utilizes ContentContainer wrapper for consistent layout
 
-**About.tsx, Projects.tsx, Blog.tsx** - Content pages that can be developed with personal information
+**About.tsx** - Personal information page with structured layout:
+- Large hero name display using responsive text sizing (5xl to 9xl)
+- Three main sections: "Currently", "Previously", "What I'm up to outside of work"
+- Color-coded bullet points (blue, green, purple) for visual organization
+- Includes University of Waterloo logo integration with external link
+- Template placeholders for personal content customization
+- Uses ContentContainer for consistent width matching
+
+**Projects.tsx, Blog.tsx** - Content pages that can be developed with personal information
 
 **Footer.tsx** - Navigation component with animated pill indicator and social links:
 - Contains `navLinks` array defining routes and labels (home, about, projects, blog)
@@ -90,3 +98,12 @@ This is a React TypeScript personal portfolio site built with Vite, styled with 
 **Responsive Design**: Consistent breakpoints across components using Tailwind responsive classes  
 **Performance**: Optimized animations with `willChange`, `transform`, and proper z-index layering  
 **File Organization**: Components in `/components`, pages in `/pages`, main app files in root
+
+### Layout Components
+
+**ContentContainer.tsx** - Responsive width container component:
+- Matches approximate width of "AUSTIN JIAN" text at different breakpoints
+- Responsive max-width scaling: 260px (base) → 320px (sm) → 420px (md) → 520px (lg) → 620px (xl)
+- Auto-centered with horizontal margins and responsive padding (px-2 to px-6)
+- Used in About.tsx and other content pages for consistent text width alignment
+- Accepts optional className prop for additional styling customization
