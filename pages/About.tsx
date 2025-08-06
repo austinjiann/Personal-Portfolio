@@ -250,12 +250,12 @@ const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = f
               href="/resume.pdf" 
               target="_blank" 
               rel="noopener noreferrer"
-              style={{
-                display: 'inline-block',
-                width: 'calc(100% - 2.5rem)',
-                maxWidth: 'calc(100% - 2.5rem)',
-                marginRight: '2rem'
-              }}
+                             style={{
+                 display: 'inline-block',
+                 width: 'calc(100% - 1.5rem)',
+                 maxWidth: 'calc(100% - 1.5rem)',
+                 marginRight: '2rem'
+               }}
             >
               <div 
                 style={{
