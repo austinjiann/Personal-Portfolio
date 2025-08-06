@@ -5,7 +5,11 @@ const uiFont = {
   fontFamily: 'Roboto, sans-serif',
 };
 
-const Projects: React.FC = () => {
+interface ProjectsProps {
+  animationComplete?: boolean;
+}
+
+const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComplete = false }) => {
   return (
     <div className="flex-1 flex items-center justify-center">
       <ContentContainer>

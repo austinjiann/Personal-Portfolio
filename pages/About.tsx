@@ -5,7 +5,11 @@ const uiFont = {
   fontFamily: 'Roboto, sans-serif',
 };
 
-const About: React.FC = () => {
+interface AboutProps {
+  animationComplete?: boolean;
+}
+
+const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = false }) => {
   return (
     <div className="flex-1 flex justify-center pt-32">
       <ContentContainer>
