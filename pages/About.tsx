@@ -259,7 +259,7 @@ const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = f
             >
               <div 
                 style={{
-                  backgroundColor: '#2E2E2E',
+                  backgroundColor: 'rgba(24, 24, 27, 0.85)',
                   border: '2px solid white',
                   borderRadius: '2rem',
                   paddingLeft: '2rem',

@@ -74,19 +74,26 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
 
           {/* Search Bar */}
           <div className="mb-8" style={{ marginTop: '24px', marginBottom: '48px' }}>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="search my projects…"
-            aria-label="Search projects"
-            className="w-full border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none backdrop-blur-[2px] transition-colors duration-200"
-            style={{ 
-              ...uiFont, 
-              width: '100%',
-              borderRadius: '1.5rem'
-            }}
-          />
+            <div data-search-wrap style={{ width: '952px', maxWidth: '100%', margin: '0 auto' }}>
+              <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="search my projects…"
+              aria-label="Search projects"
+              data-search
+              className="w-full border px-4 py-3 transition-colors duration-200 focus:outline-none"
+              style={{ 
+                ...uiFont, 
+                width: '100%',
+                borderRadius: '1.5rem',
+                backgroundColor: '#ffffff',
+                color: '#000000',
+                caretColor: '#000000',
+                borderColor: 'rgba(0,0,0,0.2)'
+              }}
+              />
+            </div>
           </div>
         
         {/* Inline, high-specificity grid */}
@@ -108,25 +115,7 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
               </li>
             ))}
           </ul>
-        ) : (
-          /* Empty State */
-          <div className="text-center py-16">
-            <div className="text-white/40 mb-4">
-              <svg className="mx-auto h-16 w-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-medium text-white/60 mb-2" style={uiFont}>
-              No projects found
-            </h3>
-            <p className="text-white/40 mb-4" style={uiFont}>
-              Try searching for different keywords
-            </p>
-            <p className="text-sm text-white/30" style={uiFont}>
-              Try "react", "python", "typescript", "blockchain"...
-            </p>
-          </div>
-        )}
+        ) : null}
 
         </div>
 
@@ -139,6 +128,11 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
               @media (min-width: 768px) {
                 :root :where([data-inline-grid]) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
               }
+
+              /* Force black focus outline and keep width constant */
+              :root input[data-search]{ box-sizing: border-box; }
+              :root input[data-search]:focus{ outline: 1px solid #fff !important; outline-offset: 0; border-color: #fff !important; box-shadow: none !important; }
+              :root input[data-search]::placeholder{ color: rgba(0,0,0,0.45); }
             `,
           }}
         />

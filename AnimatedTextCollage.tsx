@@ -272,9 +272,7 @@ const AnimatedTextCollage: React.FC<AnimatedTextCollageProps> = ({
           fadeOutBackground ? 'opacity-0' : 'opacity-100'
         }`}
         style={{ 
-          backgroundColor: '#1B1B1B',
-          backgroundImage: 'radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px)',
-          backgroundSize: '20px 20px'
+          backgroundColor: '#000000'
         }}
       />
       

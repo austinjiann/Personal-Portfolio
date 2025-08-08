@@ -18,9 +18,7 @@ const Layout: React.FC<{
     <div 
       className="min-h-screen flex flex-col text-white"
       style={{ 
-        backgroundColor: '#1B1B1B',
-        backgroundImage: 'radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px)',
-        backgroundSize: '20px 20px'
+        backgroundColor: '#000000'
       }}
     >
       {children}
@@ -76,9 +74,7 @@ const App: React.FC = () => {
           <div 
             className="fixed inset-0 text-white z-20"
             style={{ 
-              backgroundColor: '#1B1B1B',
-              backgroundImage: 'radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px)',
-              backgroundSize: '20px 20px'
+              backgroundColor: '#000000'
             }}
           >
             <div className="min-h-screen flex flex-col">
