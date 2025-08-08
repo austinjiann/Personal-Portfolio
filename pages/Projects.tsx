@@ -47,19 +47,11 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
   }, [debouncedQuery]);
 
   // Slice to first 2 AFTER filtering
-  const finalProjects = filteredProjects.slice(0, 2);
+  const visible = filteredProjects.slice(0, 2);
 
   return (
     <div className="flex-1 flex justify-center pt-32">
-      <section 
-        className="mx-auto max-w-6xl px-4"
-        style={{
-          maxWidth: '72rem',
-          margin: '0 auto',
-          padding: '0 1rem',
-          width: '100%'
-        }}
-      >
+      <section style={{ margin: "0 auto", maxWidth: "1152px", paddingLeft: "16px", paddingRight: "16px" }}>
         {/* Page Title */}
         <div className="text-center mt-28 sm:mt-32 lg:mt-40 mb-16">
           <h1 
@@ -77,8 +69,11 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
           </h1>
         </div>
 
-        {/* Search Bar */}
-        <div className="mb-8">
+        {/* Trim container: right = 5.5 grids (≈110px), left = 4.5 grids (≈90px) */}
+        <div data-right-trim style={{ width: 'calc(100% - 200px)', marginRight: '110px', marginLeft: '90px' }}>
+
+          {/* Search Bar */}
+          <div className="mb-8">
           <input
             type="text"
             value={searchQuery}
@@ -92,41 +87,23 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
               borderRadius: '1.5rem'
             }}
           />
-        </div>
+          </div>
 
-        {/* Projects Grid */}
-        {finalProjects.length > 0 ? (
-          <ul 
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
+        {/* Inline, high-specificity grid */}
+        {visible.length > 0 ? (
+          <ul
+            data-inline-grid
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
-              gap: '1.5rem',
-              width: '100%',
-              listStyle: 'none',
-              margin: 0,
-              padding: 0
+              display: "grid",
+              /* IMPORTANT: do not set gridTemplateColumns inline,
+                 the media query below controls it */
+              gap: "24px",
+              width: "100%",
+              alignItems: "stretch",
             }}
           >
-            <style dangerouslySetInnerHTML={{
-              __html: `
-                @media (min-width: 768px) {
-                  .projects-grid {
-                    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-                  }
-                }
-              `
-            }} />
-            {finalProjects.map((project) => (
-              <li 
-                key={project.id} 
-                className="h-full w-full projects-grid"
-                style={{
-                  height: '100%',
-                  width: '100%',
-                  display: 'block'
-                }}
-              >
+            {visible.map((project) => (
+              <li key={project.id} style={{ width: "100%", height: "100%" }}>
                 <ProjectCard project={project} />
               </li>
             ))}
@@ -150,6 +127,21 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
             </p>
           </div>
         )}
+
+        </div>
+
+        {/* Local media query to switch to 2 columns at md (768px) */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              /* HIGH SPECIFICITY to beat any external styles */
+              :root :where([data-inline-grid]) { display: grid !important; grid-template-columns: 1fr !important; gap: 24px !important; width: 100% !important; }
+              @media (min-width: 768px) {
+                :root :where([data-inline-grid]) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+              }
+            `,
+          }}
+        />
       </section>
     </div>
   );

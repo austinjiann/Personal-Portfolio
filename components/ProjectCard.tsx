@@ -14,35 +14,37 @@ const uiFont = {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) => {
   return (
     <article 
-      className={`group h-full flex flex-col rounded-3xl overflow-hidden border border-zinc-700/60 bg-transparent transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.35)] ${className}`}
+      className={`group h-full w-full flex flex-col rounded-3xl overflow-hidden border border-zinc-700/60 bg-transparent transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.35)] ${className}`}
       style={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        borderRadius: '1.5rem',
-        overflow: 'hidden',
+        width: "100%",
+        height: "100%",
+        maxWidth: "none",
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+        borderRadius: "24px",
         backgroundColor: 'transparent'
       }}
     >
       {/* TOP PANE - Filled background with content */}
       <div 
-        className="bg-zinc-900/85 backdrop-blur-sm p-4 sm:p-5"
+        className="bg-zinc-900/85 backdrop-blur-sm p-3 sm:p-4"
         style={{
           backgroundColor: 'rgba(24, 24, 27, 0.85)',
           backdropFilter: 'blur(4px)',
-          padding: '1.25rem'
+          padding: '0.75rem'
         }}
       >
         {/* Project Title */}
         <h3 
-          className="text-lg font-semibold tracking-tight text-white"
+          className="text-base font-semibold tracking-tight text-white"
           style={{
             ...uiFont,
-            fontSize: '1.125rem',
+            fontSize: '1rem',
             fontWeight: '600',
             letterSpacing: '-0.025em',
             color: 'white',
-            marginBottom: '0.375rem'
+            marginBottom: '0.25rem'
           }}
         >
           {project.name}
@@ -50,13 +52,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) =>
 
         {/* Project Description */}
         <p 
-          className="mt-1.5 text-sm text-zinc-300 line-clamp-3"
+          className="mt-1 text-xs text-zinc-300 line-clamp-2"
           style={{
             ...uiFont,
-            marginTop: '0.375rem',
-            fontSize: '0.875rem',
+            marginTop: '0.25rem',
+            fontSize: '0.75rem',
             color: 'rgb(212, 212, 216)',
-            lineHeight: '1.25rem'
+            lineHeight: '1rem'
           }}
         >
           {project.description}
@@ -64,25 +66,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) =>
 
         {/* Tech Stack */}
         <div 
-          className="mt-3 flex flex-wrap gap-2"
+          className="mt-2 flex flex-wrap gap-1"
           style={{
-            marginTop: '0.75rem',
+            marginTop: '0.5rem',
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '0.5rem'
+            gap: '0.25rem'
           }}
         >
           {project.tech.map((tech) => (
             <span
               key={tech}
-              className="text-xs px-2.5 py-1 rounded-full bg-zinc-800/80 text-zinc-200 border border-zinc-700/60"
+              className="text-xs px-1.5 py-0.5 rounded-full bg-zinc-800/80 text-zinc-200 border border-zinc-700/60"
               style={{
                 ...uiFont,
-                fontSize: '0.75rem',
-                paddingLeft: '0.625rem',
-                paddingRight: '0.625rem',
-                paddingTop: '0.25rem',
-                paddingBottom: '0.25rem',
+                fontSize: '0.65rem',
+                paddingLeft: '0.375rem',
+                paddingRight: '0.375rem',
+                paddingTop: '0.125rem',
+                paddingBottom: '0.125rem',
                 borderRadius: '9999px',
                 backgroundColor: 'rgba(39, 39, 42, 0.8)',
                 color: 'rgb(228, 228, 231)',
@@ -96,12 +98,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) =>
 
         {/* Action Buttons */}
         <div 
-          className="mt-4 flex items-center gap-2"
+          className="mt-2 flex items-center gap-1"
           style={{
-            marginTop: '1rem',
+            marginTop: '0.5rem',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5rem'
+            gap: '0.25rem'
           }}
         >
           {/* Live Demo Button */}
@@ -110,24 +112,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) =>
               href={project.href}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-sm rounded-full px-3 py-1.5 border border-zinc-700/60 bg-zinc-800/80 hover:bg-zinc-700/80 text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500/40"
+              className="inline-flex items-center gap-1 text-xs rounded-full px-2 py-1 border border-zinc-700/60 bg-zinc-800/80 hover:bg-zinc-700/80 text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500/40"
               style={{
                 ...uiFont,
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.5rem',
-                fontSize: '0.875rem',
+                gap: '0.25rem',
+                fontSize: '0.75rem',
                 borderRadius: '9999px',
-                paddingLeft: '0.75rem',
-                paddingRight: '0.75rem',
-                paddingTop: '0.375rem',
-                paddingBottom: '0.375rem',
+                paddingLeft: '0.5rem',
+                paddingRight: '0.5rem',
+                paddingTop: '0.25rem',
+                paddingBottom: '0.25rem',
                 border: '1px solid rgba(63, 63, 70, 0.6)',
                 backgroundColor: 'rgba(39, 39, 42, 0.8)',
                 color: 'white'
               }}
             >
-              <ExternalLink className="h-4 w-4" />
+              <ExternalLink className="h-3 w-3" />
               <span>Live</span>
             </a>
           )}
@@ -140,18 +142,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) =>
               rel="noreferrer"
               aria-label="GitHub"
               title="GitHub"
-              className="inline-flex items-center justify-center rounded-full p-1.5 border border-zinc-700/60 hover:bg-zinc-800/70 text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500/40"
+              className="inline-flex items-center justify-center rounded-full p-1 border border-zinc-700/60 hover:bg-zinc-800/70 text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500/40"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: '9999px',
-                padding: '0.375rem',
+                padding: '0.25rem',
                 border: '1px solid rgba(63, 63, 70, 0.6)',
                 color: 'white'
               }}
             >
-              <Github className="h-4 w-4" />
+              <Github className="h-3 w-3" />
             </a>
           )}
         </div>
@@ -167,9 +169,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) =>
       >
         {/* Fixed aspect ratio to keep card heights aligned */}
         <div 
-          className="aspect-[16/9] w-full overflow-hidden bg-black/40"
+          className="aspect-[4/3] w-full overflow-hidden bg-black/40"
           style={{
-            aspectRatio: '16/9',
+            aspectRatio: '4/3',
             width: '100%',
             overflow: 'hidden',
             backgroundColor: 'rgba(0, 0, 0, 0.4)'
