@@ -45,7 +45,7 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
       return terms.every(term => searchText.includes(term));
     });
   }, [debouncedQuery]);
-
+  
   // Slice to first 2 AFTER filtering
   const visible = filteredProjects.slice(0, 2);
 
@@ -73,7 +73,7 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
         <div data-right-trim style={{ width: 'calc(100% - 200px)', marginRight: '110px', marginLeft: '90px' }}>
 
           {/* Search Bar */}
-          <div className="mb-8">
+          <div className="mb-8" style={{ marginTop: '24px', marginBottom: '48px' }}>
           <input
             type="text"
             value={searchQuery}
@@ -88,7 +88,7 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
             }}
           />
           </div>
-
+        
         {/* Inline, high-specificity grid */}
         {visible.length > 0 ? (
           <ul

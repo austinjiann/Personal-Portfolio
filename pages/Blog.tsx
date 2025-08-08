@@ -15,7 +15,7 @@ const Blog: React.FC<BlogProps> = ({ animationComplete: _animationComplete = fal
       <ContentContainer>
         <div className="text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-wider text-white mb-12" style={uiFont}>
-            Blog
+            Blogs Coming SOON
           </h1>
           
         </div>

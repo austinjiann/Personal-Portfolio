@@ -130,7 +130,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) =>
               }}
             >
               <ExternalLink className="h-3 w-3" />
-              <span>Live</span>
             </a>
           )}
 
@@ -177,7 +176,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) =>
             backgroundColor: 'rgba(0, 0, 0, 0.4)'
           }}
         >
-          {project.image ? (
+          {project.video ? (
+            <video
+              src={project.video}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          ) : project.image ? (
             <img 
               src={project.image} 
               alt={`${project.name} preview`} 
