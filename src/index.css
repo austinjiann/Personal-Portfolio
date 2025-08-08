@@ -78,3 +78,23 @@ body {
   }
 }
 
+/* Line clamping utility */
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .group:hover {
+    transform: none !important;
+  }
+  
+  .hover\:scale-105:hover,
+  .hover\:scale-\[1\.01\]:hover {
+    transform: none !important;
+  }
+}
+
