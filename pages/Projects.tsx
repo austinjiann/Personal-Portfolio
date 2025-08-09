@@ -79,7 +79,7 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="search my projects…"
+              placeholder="search for project names or tech stacks.."
               aria-label="Search projects"
               data-search
               className="w-full border px-4 py-3 transition-colors duration-200 focus:outline-none"
