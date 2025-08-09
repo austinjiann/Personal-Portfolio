@@ -135,13 +135,12 @@ const Footer: React.FC = () => {
       <div
         className="fixed z-50"
         style={{
-          pointerEvents: 'auto',
-          left: 'calc(50% - min(55vw, 495px))',
-          width: 'calc(min(55vw, 470px) * 2)',
-          bottom: '48px' // a few px higher than bottom-10 (~40px)
+          // Anchor the widget to the hero's right edge without spanning the hero width
+          right: 'calc(50% - min(55vw, 455px))',
+          bottom: '48px'
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', paddingLeft: '8px', paddingRight: '6px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', paddingRight: '6px' }}>
           <a
             href={`https://cs.uwatering.com/#${webringSlug}?nav=prev`}
             aria-label="Previous site in CS Webring"
