@@ -138,7 +138,7 @@ const Footer: React.FC = () => {
           pointerEvents: 'auto',
           left: 'calc(50% - min(55vw, 495px))',
           width: 'calc(min(55vw, 470px) * 2)',
-          bottom: '52px' // a few px higher than bottom-10 (~40px)
+          bottom: '48px' // a few px higher than bottom-10 (~40px)
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', paddingLeft: '8px', paddingRight: '6px' }}>
