@@ -44,9 +44,9 @@ const BackgroundLayers: React.FC = () => {
     resizeObserverRef.current = new ResizeObserver(() => setupCanvasSize());
     resizeObserverRef.current.observe(document.body);
 
-    const maxTrailPoints = 24;
-    const baseRadiusPixels = 140; // main reveal radius
-    const fadeOverlayAlpha = 0.08; // how fast the trail refills to black each frame
+    const maxTrailPoints = 16;
+    const baseRadiusPixels = 55; // smaller reveal radius for tighter circle
+    const fadeOverlayAlpha = 0.16; // slightly faster decay for a quicker fade
 
     const addPoint = (x: number, y: number) => {
       lastPointRef.current = { x, y };
@@ -77,22 +77,39 @@ const BackgroundLayers: React.FC = () => {
       context.fillStyle = `rgba(0,0,0,${fadeOverlayAlpha})`;
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Carve out transparent holes along the recent trail with soft edges
+      // Carve out transparent holes with jittered, soft sub-stamps for a more natural look
       const points = trailPointsRef.current;
       for (let index = 0; index < points.length; index += 1) {
         const point = points[index];
         const falloff = (index + 1) / points.length; // 0..1 older → larger value
-        const radius = baseRadiusPixels * (1 - 0.7 * falloff); // newer points are larger
+        const baseR = baseRadiusPixels * (1 - 0.7 * falloff); // newer points are larger
 
-        const gradient = context.createRadialGradient(point.x, point.y, 0, point.x, point.y, Math.max(1, radius));
-        gradient.addColorStop(0, 'rgba(0,0,0,1)');
-        gradient.addColorStop(1, 'rgba(0,0,0,0)');
+        // Use a few jittered sub-stamps per point to avoid a perfect circle
+        const subStamps = 3;
+        for (let j = 0; j < subStamps; j += 1) {
+          const angleNoise = (index * 0.73 + j * 2.11) + Math.random() * 0.8;
+          const offsetScale = 0.12 + Math.random() * 0.10; // 12%..22% of base radius (tighter, more defined)
+          const offset = baseR * offsetScale;
+          const ox = point.x + Math.cos(angleNoise) * offset;
+          const oy = point.y + Math.sin(angleNoise) * offset;
+          const subRadius = Math.max(1, baseR * (0.75 + Math.random() * 0.25)); // 75%..100% of base (more defined)
 
-        context.globalCompositeOperation = 'destination-out';
-        context.fillStyle = gradient;
-        context.beginPath();
-        context.arc(point.x, point.y, Math.max(1, radius), 0, Math.PI * 2);
-        context.fill();
+          const gradient = context.createRadialGradient(ox, oy, 0, ox, oy, subRadius);
+          gradient.addColorStop(0, 'rgba(0,0,0,1)');
+          gradient.addColorStop(1, 'rgba(0,0,0,0)');
+
+          context.save();
+          context.globalCompositeOperation = 'destination-out';
+          context.globalAlpha = 0.92; // slightly stronger to define the shape
+          // slight blur to further soften the stamp
+          // @ts-ignore
+          context.filter = 'blur(0.3px)';
+          context.fillStyle = gradient;
+          context.beginPath();
+          context.arc(ox, oy, subRadius, 0, Math.PI * 2);
+          context.fill();
+          context.restore();
+        }
       }
 
       animationFrameIdRef.current = requestAnimationFrame(animate);
