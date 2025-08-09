@@ -18,6 +18,7 @@ const Footer: React.FC = () => {
   const [pillStyle, setPillStyle] = useState({ transform: 'translateX(0px)', width: '0px' });
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [webringSlug, setWebringSlug] = useState<string>('your-site-here');
   
 
 
@@ -57,6 +58,16 @@ const Footer: React.FC = () => {
       });
     }
   }, [activeIndex]);
+
+  // Derive CS Webring slug from the current origin (runtime)
+  useEffect(() => {
+    try {
+      const origin = window.location.origin;
+      setWebringSlug(encodeURIComponent(origin));
+    } catch {
+      // no-op for non-browser environments
+    }
+  }, []);
 
 
   return (
@@ -118,6 +129,48 @@ const Footer: React.FC = () => {
             <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm4.5 2.5a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5-2a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/>
           </svg>
         </a>
+      </div>
+
+      {/* CS Webring widget - right of navbar, constrained to hero width */}
+      <div
+        className="fixed z-50"
+        style={{
+          pointerEvents: 'auto',
+          left: 'calc(50% - min(55vw, 495px))',
+          width: 'calc(min(55vw, 470px) * 2)',
+          bottom: '52px' // a few px higher than bottom-10 (~40px)
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', paddingLeft: '8px', paddingRight: '6px' }}>
+          <a
+            href={`https://cs.uwatering.com/#${webringSlug}?nav=prev`}
+            aria-label="Previous site in CS Webring"
+            className="text-white/80 hover:text-white transition-colors"
+            style={{ fontSize: '18px', lineHeight: 1 }}
+          >
+            ←
+          </a>
+          <a
+            href={`https://cs.uwatering.com/#${webringSlug}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="CS Webring hub"
+          >
+            <img
+              src="https://cs.uwatering.com/icon.white.svg"
+              alt="CS Webring"
+              style={{ width: '28px', height: 'auto', opacity: 0.95 }}
+            />
+          </a>
+          <a
+            href={`https://cs.uwatering.com/#${webringSlug}?nav=next`}
+            aria-label="Next site in CS Webring"
+            className="text-white/80 hover:text-white transition-colors"
+            style={{ fontSize: '18px', lineHeight: 1 }}
+          >
+            →
+          </a>
+        </div>
       </div>
 
              {/* Navigation bar - perfectly centered */}
