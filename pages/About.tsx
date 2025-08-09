@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentContainer from '../components/ContentContainer';
+// Content on this page aligns to the same left edge as the hero/footer
 
 const uiFont = {
   fontFamily: 'Roboto, sans-serif',
@@ -11,24 +11,16 @@ interface AboutProps {
 
 const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = false }) => {
   return (
-    <div className="flex-1 flex justify-center pt-32">
-      <ContentContainer>
-        <div className="text-left mt-8">
-          <div className="text-center mt-28 sm:mt-32 lg:mt-40">
-              <h1 
-                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white text-center"
-                style={{ 
-                  ...uiFont,
-                  fontWeight: 'bold',
-                  letterSpacing: '0.1em',
-                  textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 0 0 2px rgba(0,0,0,1)',
-                  WebkitTextStroke: '1px rgba(0,0,0,0.5)',
-                  marginTop: '3rem'
-                }}
-              >
-                AUSTIN JIAN
-              </h1>
-          </div>
+    <div className="flex-1 pt-32">
+      {/* Left-aligned wrapper that matches the hero container width */}
+      <div
+        style={{
+          marginLeft: 'calc(50% - min(55vw, 470px))',
+          width: 'calc(min(55vw, 470px) * 2)',
+        }}
+      >
+        <div className="text-left mt-8 px-0 sm:px-0 md:px-0">
+
           <br/>
           <div className="mt-16 max-w-4xl mx-auto">
             {/* About Me Section */}
@@ -85,6 +77,8 @@ const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = f
                 </li>
               </ul>
             </div>  
+            <br/>
+            <br/>
             <br/>
             <div className="mb-12">
               <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-6" style={uiFont}>
@@ -170,6 +164,8 @@ const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = f
               </ul>
             </div>
             <br/>
+            <br/>
+            <br/>
             {/* Currently Section */}
             <div className="mb-12">
               <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-6" style={uiFont}>
@@ -243,46 +239,44 @@ const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = f
         </div>
         <br/>
         <br/>
+        <br/>
 
-                  {/* Resume Section */}
-          <div className="mt-24 text-center">
-            <a 
-              href="/resume.pdf" 
-              target="_blank" 
-              rel="noopener noreferrer"
-                             style={{
-                 display: 'inline-block',
-                 width: 'calc(100% - 1.5rem)',
-                 maxWidth: 'calc(100% - 1.5rem)',
-                 marginRight: '2rem'
-               }}
+        {/* Resume Section spanning full hero width */}
+        <div className="mt-24">
+          <a 
+            href="/resume.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ display: 'block', width: '100%' }}
+          >
+            <div 
+              style={{
+                backgroundColor: 'rgba(24, 24, 27, 0.85)',
+                border: '2px solid white',
+                borderRadius: '2rem',
+                paddingLeft: '2rem',
+                paddingRight: '2rem',
+                paddingTop: '2rem',
+                paddingBottom: '2rem',
+                boxSizing: 'border-box',
+                width: '100%',
+                color: 'white',
+                transform: 'scale(1)',
+                transition: 'transform 0.3s ease-out',
+                ...uiFont
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
             >
-              <div 
-                style={{
-                  backgroundColor: 'rgba(24, 24, 27, 0.85)',
-                  border: '2px solid white',
-                  borderRadius: '2rem',
-                  paddingLeft: '2rem',
-                  paddingRight: '2rem',
-                  paddingTop: '2rem',
-                  paddingBottom: '2rem',
-                  boxSizing: 'border-box',
-                  width: '100%',
-                  color: 'white',
-                  transform: 'scale(1)',
-                  transition: 'transform 0.3s ease-out',
-                  ...uiFont
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-              >
-                <span className="text-3xl sm:text-3xl font-bold tracking-wider">
+              <div className="text-center">
+                <span className="text-2xl sm:text-3xl font-bold tracking-wider">
                   <strong>check out my resume</strong>
                 </span>
               </div>
-            </a>
-          </div>
-      </ContentContainer>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,18 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Github, ExternalLink } from 'lucide-react';
 import { Project } from '../data/projects';
 
 interface ProjectCardProps {
   project: Project;
   className?: string;
+  // Optional controlled expand state (for layout that spans full row)
+  isExpanded?: boolean;
+  onToggleExpand?: () => void;
 }
 
 const uiFont = {
   fontFamily: 'Roboto, sans-serif',
 };
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '', isExpanded, onToggleExpand }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const caseBodyRef = useRef<HTMLDivElement | null>(null);
+  const [caseHeight, setCaseHeight] = useState(0);
+  const showCaseStudy = isExpanded !== undefined ? isExpanded : uncontrolledOpen;
+
+  // Measure the case study content height when opened (and on resize)
+  useEffect(() => {
+    const updateHeight = () => {
+      if (showCaseStudy && caseBodyRef.current) {
+        setCaseHeight(caseBodyRef.current.scrollHeight);
+      } else {
+        setCaseHeight(0);
+      }
+    };
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
+  }, [showCaseStudy, project]);
 
   return (
     <article 
@@ -163,6 +184,52 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) =>
               <Github className="h-3 w-3" />
             </a>
           )}
+
+          {/* Mini Case Study Toggle */}
+          <button
+            type="button"
+            aria-expanded={showCaseStudy}
+            onClick={() => (onToggleExpand ? onToggleExpand() : setUncontrolledOpen((v) => !v))}
+            className="inline-flex items-center gap-1 text-xs rounded-full px-2 py-1 border border-zinc-700/60 bg-zinc-800/80 hover:bg-zinc-700/80 text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500/40"
+            style={{
+              ...uiFont,
+              fontSize: '0.7rem',
+              borderRadius: '9999px',
+              paddingLeft: '0.5rem',
+              paddingRight: '0.5rem',
+              paddingTop: '0.25rem',
+              paddingBottom: '0.25rem',
+              border: '1px solid rgba(63, 63, 70, 0.6)',
+              backgroundColor: 'rgba(39, 39, 42, 0.8)',
+              color: 'white',
+              marginLeft: '0.25rem'
+            }}
+            title="Toggle mini case study"
+          >
+            mini case study
+          </button>
+        </div>
+      </div>
+
+      {/* Mini Case Study Content (expand/collapse) */}
+      <div
+        className="overflow-hidden"
+        aria-hidden={!showCaseStudy}
+        style={{
+          height: `${caseHeight}px`,
+          transition: 'height 300ms ease',
+          backgroundColor: 'rgba(24,24,27,0.6)',
+          borderTop: showCaseStudy ? '1px solid rgba(63,63,70,0.5)' : 'none'
+        }}
+      >
+        <div ref={caseBodyRef} style={{ padding: '0.75rem 0.75rem 0.5rem' }}>
+          <p
+            className="text-xs text-zinc-200"
+            style={{ ...uiFont, fontSize: '0.8rem', lineHeight: 1.3 }}
+          >
+            {/* You can customize this per project by adding a new field to data/projects.ts and rendering it here. */}
+            Quick notes: goals, key decisions, and impact for this project. Replace this placeholder with a brief description (2–4 sentences) or bullet points.
+          </p>
         </div>
       </div>
 

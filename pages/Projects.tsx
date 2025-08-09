@@ -52,37 +52,22 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
   return (
     <div className="flex-1 flex justify-center pt-32">
       <section style={{ margin: "0 auto", maxWidth: "1152px", paddingLeft: "16px", paddingRight: "16px" }}>
-        {/* Page Title */}
-        <div className="text-center mt-28 sm:mt-32 lg:mt-40 mb-16">
-          <h1 
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white text-center"
-            style={{ 
-              ...uiFont,
-              fontWeight: 'bold',
-              letterSpacing: '0.1em',
-              textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 0 0 2px rgba(0,0,0,1)',
-              WebkitTextStroke: '1px rgba(0,0,0,0.5)',
-              marginTop: '3rem'
-            }}
-          >
-            PROJECTS
-          </h1>
-        </div>
+        
 
         {/* Trim container: right = 5.5 grids (≈110px), left = 4.5 grids (≈90px) */}
         <div data-right-trim style={{ width: 'calc(100% - 200px)', marginRight: '110px', marginLeft: '90px' }}>
 
           {/* Search Bar */}
-          <div className="mb-8" style={{ marginTop: '24px', marginBottom: '48px' }}>
+          <div className="mb-8" style={{ marginTop: '40px', marginBottom: '48px' }}>
             <div data-search-wrap style={{ width: '952px', maxWidth: '100%', margin: '0 auto' }}>
               <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="search for project names or tech stacks.."
+              placeholder=" search for project names, tech stacks, or project types..."
               aria-label="Search projects"
               data-search
-              className="w-full border px-4 py-3 transition-colors duration-200 focus:outline-none"
+              className="w-full border px-5 py-4 transition-colors duration-200 focus:outline-none"
               style={{ 
                 ...uiFont, 
                 width: '100%',
@@ -94,6 +79,7 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
               }}
               />
             </div>
+            
           </div>
         
         {/* Inline, high-specificity grid */}
