@@ -29,6 +29,7 @@ const useDebounce = (value: string, delay: number) => {
 const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComplete = false }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedQuery = useDebounce(searchQuery, 200);
+  const [expandedProjectId, setExpandedProjectId] = useState<string | null>(null);
 
   const filteredProjects = useMemo(() => {
     if (!debouncedQuery.trim()) {
@@ -48,6 +49,16 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
   
   // Slice to first 2 AFTER filtering
   const visible = filteredProjects.slice(0, 2);
+
+  const handleToggleExpand = (projectId: string) => {
+    if (expandedProjectId === projectId) {
+      // Same project clicked - close it
+      setExpandedProjectId(null);
+    } else {
+      // Different project clicked - open this one, close others
+      setExpandedProjectId(projectId);
+    }
+  };
 
   return (
     <div className="flex-1 flex justify-center pt-32">
@@ -87,17 +98,27 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
           <ul
             data-inline-grid
             style={{
-              display: "grid",
-              /* IMPORTANT: do not set gridTemplateColumns inline,
-                 the media query below controls it */
-              gap: "24px",
-              width: "100%",
-              alignItems: "stretch",
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '24px',
+              width: '100%',
+              alignItems: 'flex-start',
             }}
           >
             {visible.map((project) => (
-              <li key={project.id} style={{ width: "100%", height: "100%" }}>
-                <ProjectCard project={project} />
+              <li
+                key={project.id}
+                style={{
+                  width: '100%',
+                  flex: '1 1 100%',
+                  maxWidth: '100%',
+                }}
+              >
+                <ProjectCard
+                  project={project}
+                  isExpanded={expandedProjectId === project.id}
+                  onToggleExpand={() => handleToggleExpand(project.id)}
+                />
               </li>
             ))}
           </ul>
@@ -105,14 +126,15 @@ const Projects: React.FC<ProjectsProps> = ({ animationComplete: _animationComple
 
         </div>
 
-        {/* Local media query to switch to 2 columns at md (768px) */}
+        {/* Local media query to keep 1 column on mobile and 2 columns at md (768px) */}
         <style
           dangerouslySetInnerHTML={{
             __html: `
               /* HIGH SPECIFICITY to beat any external styles */
-              :root :where([data-inline-grid]) { display: grid !important; grid-template-columns: 1fr !important; gap: 24px !important; width: 100% !important; }
+              :root :where([data-inline-grid]) { display: flex !important; flex-wrap: wrap !important; gap: 24px !important; width: 100% !important; align-items: flex-start !important; }
+              :root :where([data-inline-grid] > li) { flex: 1 1 100% !important; max-width: 100% !important; }
               @media (min-width: 768px) {
-                :root :where([data-inline-grid]) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+                :root :where([data-inline-grid] > li) { flex-basis: calc(50% - 12px) !important; max-width: calc(50% - 12px) !important; }
               }
 
               /* Force black focus outline and keep width constant */

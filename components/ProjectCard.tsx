@@ -37,10 +37,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '', isEx
 
   return (
     <article 
-      className={`group h-full w-full flex flex-col rounded-3xl overflow-hidden border border-zinc-700/60 bg-transparent ${className}`}
+      className={`group w-full flex flex-col rounded-3xl overflow-hidden border border-zinc-700/60 bg-transparent ${className}`}
       style={{
         width: "100%",
-        height: "100%",
         maxWidth: "none",
         display: "flex",
         flexDirection: "column",
@@ -228,9 +227,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '', isEx
             style={{ ...uiFont, fontSize: '0.8rem', lineHeight: 1.3 }}
           >
             {/* You can customize this per project by adding a new field to data/projects.ts and rendering it here. */}
-            Quick notes: goals, key decisions, and impact for this project. Replace this placeholder with a brief description (2–4 sentences) or bullet points.
+             placeholder zzzz hehaeifnjksnfjksa
           </p>
-        </div>
+        </div>Quick
       </div>
 
       {/* BOTTOM PANE - Preview only */}
