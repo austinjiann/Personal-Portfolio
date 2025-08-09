@@ -57,7 +57,7 @@ const Homepage: React.FC<HomepageProps> = ({ isVisible, showHeroText = true }) =
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       style={{ 
-        backgroundColor: '#000000'
+        backgroundColor: 'transparent'
       }}
     >
       <div className="min-h-screen flex flex-col">

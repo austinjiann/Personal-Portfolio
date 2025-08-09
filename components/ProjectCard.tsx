@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Github, ExternalLink } from 'lucide-react';
 import { Project } from '../data/projects';
 
@@ -12,9 +12,11 @@ const uiFont = {
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <article 
-      className={`group h-full w-full flex flex-col rounded-3xl overflow-hidden border border-zinc-700/60 bg-transparent transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.35)] ${className}`}
+      className={`group h-full w-full flex flex-col rounded-3xl overflow-hidden border border-zinc-700/60 bg-transparent ${className}`}
       style={{
         width: "100%",
         height: "100%",
@@ -23,8 +25,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) =>
         flexDirection: "column",
         overflow: "hidden",
         borderRadius: "24px",
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        willChange: 'transform, box-shadow',
+        transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+        boxShadow: isHovered ? '0 12px 40px rgba(0,0,0,0.45)' : '0 0 0 rgba(0,0,0,0)',
+        transition: 'transform 300ms ease-out, box-shadow 300ms ease-out'
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {/* TOP PANE - Filled background with content */}
       <div 
@@ -184,17 +192,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '' }) =>
               loop
               playsInline
               preload="metadata"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              style={{ 
+                width: '100%', 
+                height: '100%', 
+                objectFit: 'cover', 
+                display: 'block',
+                transform: isHovered ? 'scale(1.035)' : 'scale(1)',
+                transition: 'transform 300ms ease-out'
+              }}
             />
           ) : project.image ? (
             <img 
               src={project.image} 
               alt={`${project.name} preview`} 
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               style={{
                 height: '100%',
                 width: '100%',
-                objectFit: 'cover'
+                objectFit: 'cover',
+                transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+                transition: 'transform 300ms ease-out'
               }}
             />
           ) : (

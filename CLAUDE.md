@@ -116,7 +116,8 @@ This is a React TypeScript personal portfolio site built with Vite, styled with 
 **Animation Philosophy**: Visual showcase on every home navigation, creating consistent brand experience  
 **Responsive Design**: Consistent breakpoints across components using Tailwind responsive classes  
 **Performance**: Optimized animations with `willChange`, `transform`, and proper z-index layering  
-**File Organization**: Components in `/components`, pages in `/pages`, main app files in root
+**File Organization**: Main app components (App.tsx, AnimatedTextCollage.tsx, Homepage.tsx) in root, reusable components in `/components`, page components in `/pages`, main entry in `/src`  
+**TypeScript Configuration**: Strict mode enabled with noUnusedLocals, noUnusedParameters for code quality
 
 ### Layout Components
 

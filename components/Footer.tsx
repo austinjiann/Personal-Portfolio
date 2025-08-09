@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
 
 
   return (
-    <footer className="mt-auto relative">
+    <footer className="mt-auto relative" style={{ paddingTop: '48px' }}>
              {/* Social media icons - positioned left of center */}
        <div
          className="fixed bottom-10 flex space-x-4 transition-all duration-700 transform opacity-100 z-50"

@@ -16,7 +16,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #000000;
-  background-image: none;
+  /* Pattern is now handled by global BackgroundLayers; keep body solid black */
   color: #fff;
   overflow-x: hidden;
 }

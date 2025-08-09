@@ -81,7 +81,7 @@ const About: React.FC<AboutProps> = ({ animationComplete: _animationComplete = f
                 </li>
                 <li className="flex items-start mb-6">
                   <span className="text-blue-400 mr-3 mt-1">•</span>
-                  <span>&nbsp;Building live clip farming and stat analysis for all athletes</span>
+                  <span>&nbsp;Building Playbookz (live clip farming and stat analysis for all athletes)</span>
                 </li>
               </ul>
             </div>  
